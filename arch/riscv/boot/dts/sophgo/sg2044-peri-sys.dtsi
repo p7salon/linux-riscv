@@ -79,7 +79,7 @@
 			reg-io-width = <4>;
 		};
 
-		emmc: bm-emmc@703000A000 {
+		emmc: emmc@703000A000 {
 			compatible = "sophgo,sg2044-dwcmshc", "sophgo,sg2042-dwcmshc";
 			reg = <0x70 0x3000A000 0x0 0x1000>;
 			reg-names = "core_mem";
@@ -99,7 +99,7 @@
 			clock-names = "core", "bus", "timer";
 		};
 
-		sd: bm-sd@703000B000 {
+		sd: sd@703000B000 {
 			compatible = "sophgo,sg2044-dwcmshc", "sophgo,sg2042-dwcmshc";
 			reg = <0x70 0x3000B000 0x0 0x1000>;
 			reg-names = "core_mem";
@@ -142,38 +142,6 @@
 				interrupt-parent = <&intc>;
 				interrupts = <26 IRQ_TYPE_LEVEL_HIGH>;
 			};
-		};
-
-		spi0: spi@7030004000 {
-			compatible = "snps,dw-apb-ssi";
-			#address-cells = <1>;
-			#size-cells = <0>;
-			reg = <0x70 0x30004000 0x0 0x1000>;
-			interrupt-parent = <&intc>;
-			interrupts = <39 IRQ_TYPE_LEVEL_HIGH>;
-			clocks = <&div_clk GATE_CLK_APB_SPI>,
-				<&div_clk GATE_CLK_SYSDMA_AXI>;
-			clock-frequency = <250000000>;
-			resets = <&rst SG2044_RST_SPI0>;
-			reset-names = "spi";
-			num-cs = <2>;
-			status = "disable";
-		};
-
-		spi1: spi@7030005000 {
-			compatible = "snps,dw-apb-ssi";
-			#address-cells = <1>;
-			#size-cells = <0>;
-			reg = <0x70 0x30005000 0x0 0x1000>;
-			interrupt-parent = <&intc>;
-			interrupts = <40 IRQ_TYPE_LEVEL_HIGH>;
-			clocks = <&div_clk GATE_CLK_APB_SPI>,
-				<&div_clk GATE_CLK_SYSDMA_AXI>;
-			clock-frequency = <250000000>;
-			resets = <&rst SG2044_RST_SPI1>;
-			reset-names = "spi";
-			num-cs = <2>;
-			status = "disable";
 		};
 
 		gpio1: gpio@704000a000 {
@@ -281,14 +249,46 @@
 			reset-names = "i2c3";
 		};
 
-		pwm0: pwm@704000c000 {
+		spi0: spi@7030004000 {
+			compatible = "snps,dw-apb-ssi";
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <0x70 0x30004000 0x0 0x1000>;
+			interrupt-parent = <&intc>;
+			interrupts = <39 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&div_clk GATE_CLK_APB_SPI>,
+				<&div_clk GATE_CLK_SYSDMA_AXI>;
+			clock-frequency = <250000000>;
+			resets = <&rst SG2044_RST_SPI0>;
+			reset-names = "spi";
+			num-cs = <2>;
+			status = "disable";
+		};
+
+		spi1: spi@7030005000 {
+			compatible = "snps,dw-apb-ssi";
+			#address-cells = <1>;
+			#size-cells = <0>;
+			reg = <0x70 0x30005000 0x0 0x1000>;
+			interrupt-parent = <&intc>;
+			interrupts = <40 IRQ_TYPE_LEVEL_HIGH>;
+			clocks = <&div_clk GATE_CLK_APB_SPI>,
+				<&div_clk GATE_CLK_SYSDMA_AXI>;
+			clock-frequency = <250000000>;
+			resets = <&rst SG2044_RST_SPI1>;
+			reset-names = "spi";
+			num-cs = <2>;
+			status = "disable";
+		};
+
+		pwm: pwm@704000c000 {
 			compatible = "sophgo,sg-pwm";
 			reg = <0x70 0x4000c000 0x0 0x1000>;
 			clocks = <&div_clk GATE_CLK_APB_PWM>;
 			#pwm-cells = <2>;
 		};
 
-		dmac0: dma@7020000000 {
+		dma: dma@7020000000 {
 			compatible = "snps,axi-dma-1.01a";
 			reg = <0x70 0x20000000 0x0 0x10000>;
 			clock-names = "core-clk", "cfgr-clk";
@@ -341,7 +341,7 @@
 			};
 		};
 
-		watchdog0: bm-wd@7040004000 {
+		watchdog: wdt@7040004000 {
 			compatible = "snps,dw-wdt";
 			reg = <0x70 0x40004000 0x0 0x1000>;
 			subctrl-syscon = <&top_misc>;
@@ -363,11 +363,11 @@
 			cell_width = <4>;
 		};
 
-		base {
-				compatible = "sophon,base";
+		base: base {
+			compatible = "sophon,base";
 		};
 
-		p2p:  p2p {
+		p2p: p2p {
 			compatible = "sophgon, p2p";
 			reg = <0x0000006c 0x08790000 0x00000000 0x000010000>,
 				<0x0000006c 0x087D0000 0x00000000 0x000010000>;
@@ -408,7 +408,7 @@
 			queue7 {};
 		};
 
-		ethernet0: ethernet@7030006000 {
+		ethernet: ethernet@7030006000 {
 			compatible = "sophgo,ethernet";
 			reg = <0x70 0x30006000 0x0 0x4000>,
 				<0x70 0x50000000 0x0 0x0400>;

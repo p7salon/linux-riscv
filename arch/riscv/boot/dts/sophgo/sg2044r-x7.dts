@@ -11,22 +11,19 @@
 #include "sg2044r-clock.dtsi"
 #include "sg2044-peri-sys.dtsi"
 
-/ {
-	/delete-node/ memory@80200000;
-	/delete-node/ bm-emmc@703000A000;
-	/delete-node/ pwm@704000c000;
-	/delete-node/ dma@7020000000;
-	/delete-node/ bm-wd@7040004000;
-	/delete-node/ p2p;
-	/delete-node/ base;
-	/delete-node/ stmmac-axi-config;
-	/delete-node/ rx-queues-config;
-	/delete-node/ tx-queues-config;
-	/delete-node/ ethernet@7030006000;
-	/delete-node/ aliases;
-};
+/delete-node/ &emmc;
+/delete-node/ &pwm;
+/delete-node/ &dma;
+/delete-node/ &watchdog;
+/delete-node/ &p2p;
+/delete-node/ &base;
+/delete-node/ &stmmac_axi_setup;
+/delete-node/ &mtl_rx_setup;
+/delete-node/ &mtl_tx_setup;
+/delete-node/ &ethernet;
 
 / {
+	/delete-node/ memory@80200000;
 	memory@82400000 {
 		device_type = "memory";
 		reg = <0x00000000 0x82400000 0x00000000 0x7dc00000>;
@@ -105,6 +102,7 @@
 	};
 
 
+	/delete-node/ aliases;
 	aliases {
 		serial0 = &uart0;
 	};

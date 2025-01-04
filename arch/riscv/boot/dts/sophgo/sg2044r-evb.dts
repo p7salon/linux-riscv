@@ -14,8 +14,9 @@
 #include "sg2044-pcie-msi.dtsi"
 //#include "sg2044-pcie-1rc.dtsi"
 
+/delete-node/ &emmc;
+
 / {
-	/delete-node/ bm-emmc@703000A000;
 	aliases {
 		serial0 = &uart1;
 	};

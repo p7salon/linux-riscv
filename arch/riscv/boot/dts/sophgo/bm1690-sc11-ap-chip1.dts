@@ -13,11 +13,11 @@
 #include "sg2044-peri-sys.dtsi"
 #include "bm1690-pcie-msi.dtsi"
 
+/delete-node/ &emmc;
+
 / {
 	/delete-node/ memory@80200000;
-	/delete-node/ bm-emmc@703000A000;
-
-	memory@80200000 {
+	memory@1ea0200000 {
 		device_type = "memory";
 		reg = <0x0000001e 0xa0200000 0x00000000 0x4fe00000>;
 	};
